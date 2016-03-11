@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,9 @@ public class Questions extends HttpServlet {
 			throws IOException, ServletException {
 		try {
 			List<Post> questions = sendRequest();
+			request.setAttribute("questions", questions);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/questions.jsp");
+			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

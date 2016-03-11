@@ -2,6 +2,8 @@ package com.main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,25 +23,31 @@ public class Questions extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		try {
-			sendRequest();
+			List<Post> questions = sendRequest();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private void sendRequest() throws Exception {
+	private List<Post> sendRequest() throws Exception {
+		List<Post> posts = new ArrayList<Post>();
 		String url = "https://api.stackexchange.com//2.2/questions?order=desc&sort=activity&tagged=inheritence;java&site=stackoverflow";
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpGet request = new HttpGet(url);
 		HttpResponse response = client.execute(request);
-
 		JSONObject json = new JSONObject(EntityUtils.toString(response.getEntity()));
 		JSONArray array = json.getJSONArray("items");
-		JSONObject j = (JSONObject)array.get(0);
-		String abc = "abc";
+		for(int i=0;i<array.length();i++) {
+			JSONObject jsonPost = (JSONObject)array.get(i);
+			String title = jsonPost.getString("title");
+			String link = jsonPost.getString("link");
+			String content = "abc";
+			Post post = new Post(title,link,content);
+			posts.add(post);
+		}
 		
-		
+		return posts;
 		
 	}
 }

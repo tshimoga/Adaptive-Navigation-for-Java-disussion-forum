@@ -9,7 +9,7 @@
 </head>
 <body>
 	<c:forEach items="${questions}" var="question">
-		<a href="${question.link}">${question.title}</a>
+		<a href="${question.link}">${question.title}</a><br/>
 	</c:forEach>
 </body>
 </html>

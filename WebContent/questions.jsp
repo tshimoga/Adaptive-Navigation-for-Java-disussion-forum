@@ -5,11 +5,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Questions</title>
 </head>
 <body>
-	<c:forEach items="${questions}" var="question">
-		<a href="${question.link}">${question.title}</a><br/>
-	</c:forEach>
+	<table border="1">
+		<c:forEach items="${questions}" var="question">
+		<tr onClick="<c:url value="/answers?id=${question.id}" />">
+		<td><b>${question.title}</b><br/>
+		${question.shortBody}
+		</td>
+		</tr>
+		</c:forEach>
+	</table>
+	
 </body>
 </html>

@@ -12,7 +12,6 @@ public class Question {
 	private List<Tag> tags;
 	private List<Answer> answers;
 	
-	
 	public List<Answer> getAnswers() {
 		return answers;
 	}
@@ -62,5 +61,11 @@ public class Question {
 	}
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+	
+	public String getShortBody() {
+		String[] arr = body.split("<p>");
+		String[] arr2 = arr[1].split("</p>");
+		return arr2[0];
 	}
 }

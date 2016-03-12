@@ -5,15 +5,15 @@
     <servlet-class>com.main.QuestionServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>thread</servlet-name>
-    <servlet-class>com.main.Thread</servlet-class>
+    <servlet-name>answers</servlet-name>
+    <servlet-class>com.main.AnswerServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>questions</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>thread</servlet-name>
-    <url-pattern>/thread</url-pattern>
+    <servlet-name>answers</servlet-name>
+    <url-pattern>/answers</url-pattern>
   </servlet-mapping>
 </web-app>

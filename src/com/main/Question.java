@@ -1,13 +1,24 @@
 package com.main;
 
+import java.util.List;
+
 public class Question {
 	private int id;
 	private String title;
-	private String content;
-	private String code;
+	private String body;
 	private User askedBy;
+	private boolean isAnswered;
+	private int votes;
+	private List<Tag> tags;
+	private List<Answer> answers;
 	
 	
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
 	public int getId() {
 		return id;
 	}
@@ -20,22 +31,36 @@ public class Question {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContent() {
-		return content;
+	public String getBody() {
+		return body;
 	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
+	public void setBody(String body) {
+		this.body = body;
 	}
 	public User getAskedBy() {
 		return askedBy;
 	}
 	public void setAskedBy(User askedBy) {
 		this.askedBy = askedBy;
+	}
+	
+	public boolean isAnswered() {
+		return isAnswered;
+	}
+	public void setAnswered(boolean isAnswered) {
+		this.isAnswered = isAnswered;
+	}
+	
+	public int getVotes() {
+		return votes;
+	}
+	public void setVotes(int votes) {
+		this.votes = votes;
+	}
+	public List<Tag> getTags() {
+		return tags;
+	}
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 }

@@ -20,11 +20,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class QuestionServlet extends HttpServlet {
+	
+	private static String questionURL = "https://api.stackexchange.com//2.2/questions?";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		try {
-			List<Thread> questions = sendRequest();
+			List<Tag> tags= new ArrayList<Tag>();
+			tags.add(Tag.java);
+			tags.add(Tag.inheritence);
+			List<Question> questions = sendRequest(tags);
 			request.setAttribute("questions", questions);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/questions.jsp");
 			dispatcher.forward(request, response);
@@ -34,24 +39,44 @@ public class QuestionServlet extends HttpServlet {
 		}
 	}
 
-	private List<Thread> sendRequest() throws Exception {
-		List<Thread> threads = new ArrayList<Thread>();
-		String url = "https://api.stackexchange.com//2.2/questions?order=desc&sort=activity&tagged=inheritence;java&site=stackoverflow";
+	private List<Question> sendRequest(List<Tag> tags) throws Exception {
+		List<Question> questions = new ArrayList<Question>();
+		StringBuilder url = new StringBuilder(questionURL);
+		url.append("order=desc");
+		url.append("&sort=activity");
+		url.append("&tagged=");
+		for(Tag tag: tags) {
+			url.append(tag.toString()+";");
+		}
+		url.append("&site=stackoverflow");
+		url.append("&filter=!9YdnSIN*R");
 		CloseableHttpClient client = HttpClients.createDefault();
-		HttpGet request = new HttpGet(url);
+		HttpGet request = new HttpGet(url.toString());
 		HttpResponse response = client.execute(request);
 		JSONObject json = new JSONObject(EntityUtils.toString(response.getEntity()));
 		JSONArray array = json.getJSONArray("items");
 		for(int i=0;i<array.length();i++) {
 			JSONObject jsonPost = (JSONObject)array.get(i);
-			String title = jsonPost.getString("title");
-			
-			
-			
-			
+			Question question = extractQuestionInformation(jsonPost);
+			questions.add(question);
 		}
+		return questions;
+	}
+	
+	private Question extractQuestionInformation(JSONObject jsonPost) {
+		Question question = new Question();
+		question.setId(jsonPost.getInt("question_id"));
+		question.setTitle(jsonPost.getString("title"));
+		question.setAnswered(jsonPost.getBoolean("is_answered"));
+		question.setAnswers(extractAnswers(jsonPost.getJSONArray("answers")));
+		question.setBody(jsonPost.getString("body"));
+		return question;
+	}
+	
+	
+	private List<Answer> extractAnswers(JSONArray jsonArray) {
+		List<Answer> answers = new ArrayList<Answer>();
 		
-		return threads;
-		
+		return answers;
 	}
 }

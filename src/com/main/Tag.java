@@ -11,7 +11,4 @@ public enum Tag {
 	private Tag(String name) {
 		this.name = name;
 	}
-	
-	
-	
 }

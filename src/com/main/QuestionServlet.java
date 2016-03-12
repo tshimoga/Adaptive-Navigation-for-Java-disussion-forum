@@ -20,8 +20,8 @@ import org.json.JSONObject;
 
 public class QuestionServlet extends HttpServlet {
 
-	private static String questionURL = "https://api.stackexchange.com/2.2/questions?";
-	private static String filter = "!-*f(6rc.lFba";
+	private static String questionURL = "https://api.stackexchange.com/2.2/questions?order=desc&sort=activity&tagged=tags&site=stackoverflow&filter=filters";
+	private static String filter = "!9YdnSIN18";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
@@ -42,18 +42,11 @@ public class QuestionServlet extends HttpServlet {
 
 	private List<Question> getQuestions(List<Tag> tags) throws Exception {
 		List<Question> questions = new ArrayList<Question>();
-		StringBuilder url = new StringBuilder(questionURL);
-		url.append("order=desc");
-		url.append("&sort=activity");
-		url.append("&tagged=");
-		for (Tag tag : tags) {
-			url.append(tag.toString() + ";");
-		}
-		url.append("&site=stackoverflow");
-		url.append("&filter=");
-		url.append(filter);
+		String url = questionURL;
+		url = url.replace("tags", Tag.getTags(tags));
+		url = url.replace("filters", filter);
 		CloseableHttpClient client = HttpClients.createDefault();
-		HttpGet request = new HttpGet(url.toString());
+		HttpGet request = new HttpGet(url);
 		HttpResponse response = client.execute(request);
 		JSONObject json = new JSONObject(EntityUtils.toString(response
 				.getEntity()));

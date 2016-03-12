@@ -10,8 +10,8 @@
 <body>
 	<table border="1">
 		<c:forEach items="${questions}" var="question">
-		<tr onClick="<c:url value="/answers?id=${question.id}" />">
-		<td><b>${question.title}</b><br/>
+		<tr>
+		<td><a href="<c:url value="/answers?id=${question.id}" />">${question.title}</a><br/>
 		${question.shortBody}
 		</td>
 		</tr>

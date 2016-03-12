@@ -1,5 +1,7 @@
 package com.main;
 
+import java.util.List;
+
 public enum Tag {
 	java("java"), inheritence("inheritence"), polymorphism("polymorphism"), collections(
 			"collections"), generics("generics"), database("database"), image(
@@ -10,5 +12,13 @@ public enum Tag {
 
 	private Tag(String name) {
 		this.name = name;
+	}
+	
+	public static String getTags(List<Tag> tags ) {
+		StringBuilder str = new StringBuilder();
+		for(Tag t : tags) {
+			str.append(t.name+";");
+		}
+		return str.toString();
 	}
 }

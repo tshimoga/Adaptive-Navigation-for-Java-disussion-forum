@@ -8,6 +8,22 @@
     <servlet-name>answers</servlet-name>
     <servlet-class>com.main.AnswerServlet</servlet-class>
   </servlet>
+   <servlet>
+    <servlet-name>LoginController</servlet-name>
+    <servlet-class>com.main.LoginController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RegisterController</servlet-name>
+    <servlet-class>com.main.RegisterController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginController</servlet-name>
+    <url-pattern>/LoginController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RegisterController</servlet-name>
+    <url-pattern>/RegisterController</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>questions</servlet-name>
     <url-pattern>/</url-pattern>

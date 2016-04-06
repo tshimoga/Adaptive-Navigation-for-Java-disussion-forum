@@ -3,7 +3,7 @@ package com.main;
 import java.util.List;
 
 public enum Tag {
-	java("java"), inheritence("inheritence"), polymorphism("polymorphism"), collections(
+	java("java"), inheritance("inheritance"), polymorphism("polymorphism"), collections(
 			"collections"), generics("generics"), database("database"), image(
 			"image"), nio("nio"), io("io"), nio2("nio2"), sockets("sockets"), debugging(
 			"debugging"), android("android"), mysql("mysql");
@@ -21,6 +21,7 @@ public enum Tag {
 		}
 		return str.toString();
 	}
+	
 }
 
 

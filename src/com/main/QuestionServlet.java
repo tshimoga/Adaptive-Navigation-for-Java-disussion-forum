@@ -37,6 +37,10 @@ public class QuestionServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		doGet(req,res);
+	}
 
 	private List<Question> getQuestions(List<Tag> tags) throws Exception {
 		List<Question> questions = new ArrayList<Question>();

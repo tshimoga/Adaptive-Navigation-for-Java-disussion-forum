@@ -26,10 +26,8 @@ public class QuestionServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		try {
-			List<Tag> tags = new ArrayList<Tag>();
-			tags.add(Tag.java);
-			tags.add(Tag.inheritence);
-			List<Question> questions = getQuestions(tags);
+			User user = (User) request.getSession().getAttribute("user");
+			List<Question> questions = getQuestions(user.getInterests());
 			request.setAttribute("questions", questions);
 			RequestDispatcher dispatcher = getServletContext()
 					.getRequestDispatcher("/questions.jsp");
